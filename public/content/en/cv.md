@@ -72,16 +72,44 @@ Marketing and data analysis startup.
 
 ## Tech Stack
 ### Security Tools (Basic Level)
-- Kali Linux, NMAP, Burp Suite, Wireshark, ElasticSearch, Splunk, EDR/SIEM, GoBuster, OWASP Top 10.
+<div class="flex flex-wrap gap-3 mb-8">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux"> Kali Linux</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/radar.png" alt="NMAP"> NMAP</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/burpsuite" alt="Burp Suite"> Burp Suite</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/wireshark" alt="Wireshark"> Wireshark</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/elasticsearch" alt="ElasticSearch"> ElasticSearch</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/splunk" alt="Splunk"> Splunk</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="GoBuster"> GoBuster</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/shield.png" alt="OWASP Top 10"> OWASP Top 10</span>
+</div>
 
 ### Web Development
-- PHP (Symfony), JavaScript, MySQL, API Management, HTML, CSS.
+<div class="flex flex-wrap gap-3 mb-8">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/php" alt="PHP">PHP</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/symfony" alt="Symfony">Symfony</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript"> JavaScript</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/jquery" alt="JavaScript"> JQuery</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/api.png" alt="APIs"> API Management</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/html5" alt="HTML5">HTML</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/css" alt="CSS3">CSS</span>
+</div>
 
 ### Systems
-- Linux (Debian), Bash Scripting, Docker.
+<div class="flex flex-wrap gap-3 mb-8">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/debian" alt="Debian"> Linux (Debian)</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/gnubash" alt="Bash"> Bash Scripting</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/docker" alt="Docker"> Docker</span>
+</div>
 
-### Management
-- Git, Bitbucket, Jira, Trello.
+### Version control and Management
+<div class="flex flex-wrap gap-3">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/git" alt="Git">Git</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/github" alt="Git">Github</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/bitbucket" alt="Bitbucket">Bitbucket</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/jira" alt="Jira">Jira</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/trello" alt="Trello">Trello</span>
+</div>
 
 </div>
 
