@@ -72,7 +72,7 @@ Startup del sector marketing y análisis de datos.
 
 ## Stack Tecnológico
 
-### Herramientas de Seguridad
+### Herramientas de Seguridad (Nivel Básico)
 <div class="flex flex-wrap gap-3 mb-8">
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux"> Kali Linux</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/radar.png" alt="NMAP"> NMAP</span>
