@@ -57,7 +57,7 @@ Marketing and data analysis startup.
 - Responsible for the backend and frontend of the application.
 - Database management.
 - Integration with external APIs.
-- Deployment and maintenance on Linux servers.
+- Deployment, maintenance and logs management on Linux servers.
 - Continuous refactoring and performance improvement.
 
 ### Full Stack Developer | Delta Gestión y Control de Sistemas SL
@@ -73,31 +73,35 @@ Marketing and data analysis startup.
 ## Tech Stack
 ### Security Tools (Basic Level)
 <div class="flex flex-wrap gap-3 mb-8">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/elasticstack" alt="ElasticStack"> ElasticStack</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/splunk" alt="Splunk"> Splunk</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/monster" alt="Microsoft Sentinel"> Microsoft Sentinel</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/zotero" alt="Zabbix"> Zabbix</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/wireshark" alt="Wireshark"> Wireshark</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux"> Kali Linux</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/radar.png" alt="NMAP"> NMAP</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/burpsuite" alt="Burp Suite"> Burp Suite</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/wireshark" alt="Wireshark"> Wireshark</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/elasticsearch" alt="ElasticSearch"> ElasticSearch</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/splunk" alt="Splunk"> Splunk</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="GoBuster"> GoBuster</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/shield.png" alt="OWASP Top 10"> OWASP Top 10</span>
 </div>
 
-### Web Development
+### Programming Languages
 <div class="flex flex-wrap gap-3 mb-8">
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/python" alt="Python"> Python</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript"> JavaScript</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/php" alt="PHP">PHP</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/symfony" alt="Symfony">Symfony</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript"> JavaScript</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/jquery" alt="JavaScript"> JQuery</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/jquery" alt="JavaScript"> JQuery</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/api.png" alt="APIs"> API Management</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/html5" alt="HTML5">HTML</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/css" alt="CSS3">CSS</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/tailwindcss" alt="CSS3">TailwindCSS</span>
 </div>
 
 ### Systems
 <div class="flex flex-wrap gap-3 mb-8">
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/debian" alt="Debian"> Linux (Debian)</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/linux" alt="Linux"> Linux</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/gnubash" alt="Bash"> Bash Scripting</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/docker" alt="Docker"> Docker</span>
 </div>
