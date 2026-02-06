@@ -1,17 +1,8 @@
 import { marked } from 'marked';
 import fm from 'front-matter';
-import Prism from 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css'; // Switch to a cleaner Prism theme
 import { getLang } from './i18n.js';
 
-// Configure marked
 marked.setOptions({
-    highlight: function (code, lang) {
-        if (Prism.languages[lang]) {
-            return Prism.highlight(code, Prism.languages[lang], lang);
-        }
-        return code;
-    },
     headerIds: true,
     mangle: false
 });
@@ -47,8 +38,6 @@ export async function renderContent(fileName, container) {
             ${htmlContent}
         </div>
         `;
-
-        Prism.highlightAllUnder(container);
     } catch (error) {
         container.innerHTML = `<div class="p-12 text-center text-white/20 italic font-medium">Contenido no disponible temporalmente.</div>`;
     }

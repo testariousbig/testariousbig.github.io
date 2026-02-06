@@ -1,6 +1,10 @@
 import './style.css';
 import { getLang, setLang, t } from './i18n.js';
 import { renderContent } from './loader.js';
+import { cheatsheetTools, cheatsheetSections } from './cheatsheet-data.js';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-bash';
 
 const app = document.querySelector('#app');
 
@@ -20,6 +24,7 @@ function renderUI() {
         <div class="glass flex items-center gap-2 p-1.5 rounded-full">
           <a href="#home" class="nav-item ${currentHash === '#home' ? 'active' : ''}">${t('home')}</a>
           <a href="#cv" class="nav-item ${currentHash === '#cv' ? 'active' : ''}">${t('cv')}</a>
+          <a href="#cheatsheet" class="nav-item ${currentHash.startsWith('#cheatsheet') ? 'active' : ''}">${t('cheatsheet')}</a>
           <button id="lang-toggle" class="nav-item flex items-center opacity-80 hover:opacity-100 uppercase text-[10px] tracking-widest pl-4 border-l border-white/10 group">
             ${lang === 'es' ? flags.en : flags.es}
             <span>${t('switchLang')}</span>
@@ -78,6 +83,101 @@ function renderUI() {
   handleRouting();
 }
 
+function renderCheatsheetLayout(activeToolId, tool) {
+  const toolsBySection = {};
+  Object.values(cheatsheetTools).forEach((td) => {
+    if (!toolsBySection[td.sectionId]) toolsBySection[td.sectionId] = [];
+    toolsBySection[td.sectionId].push(td);
+  });
+
+  const sidebarItems = cheatsheetSections.map((sec) => {
+    const tools = toolsBySection[sec.id] || [];
+    if (tools.length === 0) return '';
+    const toolsHtml = tools.map((toolData) => {
+      const isActive = toolData.id === activeToolId;
+      return `
+        <a href="#cheatsheet/${toolData.id}" class="cheatsheet-sidebar-item pl-4 ${isActive ? 'active' : ''}">
+          <span class="font-semibold">${toolData.nameKey ? t(toolData.nameKey) : toolData.name}</span>
+          <span class="text-xs opacity-70">${t(toolData.descKey)}</span>
+        </a>
+      `;
+    }).join('');
+    return `
+      <div class="mb-4">
+        <h4 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 px-2">${t(sec.titleKey)}</h4>
+        <div class="space-y-1">${toolsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  const copyIcon = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+
+  const categoriesHtml = tool.categories.map((cat) => {
+    const commandsHtml = (cat.commands || []).map((c) => `
+      <div class="glass-dark rounded-lg p-4 group hover:border-white/15 transition-colors">
+        <p class="text-sm text-white/60 mb-2">${t(c.descKey)}</p>
+        <div class="code-block-wrapper relative">
+          <button type="button" class="copy-btn absolute top-2 right-2 p-1.5 rounded-md text-white/50 hover:text-white hover:bg-white/10 transition-colors" data-copy="${escapeHtml(c.cmd)}" title="${t('cheatsheet_copy')}">
+            ${copyIcon}
+          </button>
+          <pre class="text-sm overflow-x-auto pr-12"><code class="language-bash">${escapeHtml(c.cmd)}</code></pre>
+        </div>
+      </div>
+    `).join('');
+    const paramsHtml = (cat.params || []).map((p) => `
+      <li class="flex items-start gap-3 py-2 border-b border-white/5 last:border-0">
+        <code class="shrink-0 px-2 py-1 text-sm rounded bg-white/10 text-emerald-400 font-mono">${escapeHtml(p.param)}</code>
+        <span class="text-sm text-white/60">${t(p.descKey)}</span>
+      </li>
+    `).join('');
+    return `
+    <div class="mb-8">
+      <h3 class="text-lg font-semibold text-white/90 mb-4 pb-2 border-b border-white/10">${t(cat.titleKey)}</h3>
+      <div class="space-y-4">
+        ${commandsHtml}
+        ${paramsHtml ? `<ul class="glass-dark rounded-lg p-4 list-none">${paramsHtml}</ul>` : ''}
+      </div>
+    </div>
+  `;
+  }).join('');
+
+  return `
+    <aside class="glass shrink-0 w-full md:w-56 rounded-xl p-4 h-fit md:sticky md:top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <nav class="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+        ${sidebarItems}
+      </nav>
+    </aside>
+    <div class="glass-card flex-1 min-w-0">
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-white mb-1">${tool.nameKey ? t(tool.nameKey) : tool.name}</h2>
+        <p class="text-white/60 text-sm">${t(tool.descKey)}</p>
+      </div>
+      <div class="space-y-2">
+        ${categoriesHtml}
+      </div>
+    </div>
+  `;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function handleCopy(btn) {
+  const text = btn.getAttribute('data-copy');
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.innerHTML = `<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
+    btn.classList.add('!text-emerald-400');
+    setTimeout(() => {
+      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
+      btn.classList.remove('!text-emerald-400');
+    }, 1500);
+  });
+}
+
 function setupEventListeners() {
   const langBtn = document.querySelector('#lang-toggle');
   langBtn?.addEventListener('click', (e) => {
@@ -96,6 +196,18 @@ function handleRouting() {
   const hash = window.location.hash || '#home';
   const contentArea = document.querySelector('#content');
   if (!contentArea) return;
+
+  if (hash.startsWith('#cheatsheet')) {
+    const toolId = (hash.split('/')[1] || '').trim() || 'nmap';
+    const tool = cheatsheetTools[toolId] || cheatsheetTools.nmap;
+    contentArea.className = 'fade-in min-h-[400px] w-full flex flex-col md:flex-row gap-6';
+    contentArea.innerHTML = renderCheatsheetLayout(toolId, tool);
+    Prism.highlightAllUnder(contentArea);
+    contentArea.querySelectorAll('.copy-btn').forEach((btn) => {
+      btn.addEventListener('click', () => handleCopy(btn));
+    });
+    return;
+  }
 
   if (hash === '#cv') {
     contentArea.className = 'fade-in min-h-[400px] w-full'; // Remove glass-card
