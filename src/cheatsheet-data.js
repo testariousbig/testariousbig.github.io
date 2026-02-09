@@ -260,6 +260,7 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_escalada_title',
         commands: [
+          { descKey: 'cheatsheet_escalada_gtfo', cmd: 'https://gtfobins.org/' },
           { descKey: 'cheatsheet_escalada_suid', cmd: 'find / -perm -4000 2>/dev/null' },
           { descKey: 'cheatsheet_escalada_cap', cmd: 'getcap -r / 2>/dev/null' },
           { descKey: 'cheatsheet_escalada_sudo', cmd: 'sudo -l' },
