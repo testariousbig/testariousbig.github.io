@@ -188,7 +188,12 @@ function setupEventListeners() {
   });
 
   window.addEventListener('hashchange', () => {
-    renderUI();
+    const hash = window.location.hash || '#home';
+    if (hash.startsWith('#cheatsheet')) {
+      handleRouting(); // Solo actualizar contenido, no toda la UI
+    } else {
+      renderUI(); // Renderizar UI completa para otras secciones
+    }
   }, { once: true }); // Avoid multiple listeners if rerendering
 }
 
@@ -260,7 +265,7 @@ function handleRouting() {
               <div class="flex-grow">
                 <div class="flex items-center justify-between mb-1">
                   <span class="text-sm font-semibold text-white/90">${t('statusWebPen')}</span>
-                  <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">${t('statusOngoing')}</span>
+                  <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/30">${t('statusFinished')}</span>
                 </div>
                 <p class="text-xs text-white/40">TryHackMe Path</p>
               </div>
@@ -303,7 +308,12 @@ function handleRouting() {
 
 // Ensure hashchange listener is centralized and not duplicated
 window.onhashchange = () => {
-  renderUI();
+  const hash = window.location.hash || '#home';
+  if (hash.startsWith('#cheatsheet')) {
+    handleRouting(); // Solo actualizar contenido, no toda la UI
+  } else {
+    renderUI(); // Renderizar UI completa para otras secciones
+  }
 };
 
 window.addEventListener('languageChanged', () => {

