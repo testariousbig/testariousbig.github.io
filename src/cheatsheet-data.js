@@ -60,7 +60,7 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_gobuster_cat2_title',
         commands: [
-          { descKey: 'cheatsheet_gobuster_cat2_cmd1', cmd: 'gobuster dns -d target.com -w /usr/share/wordlists/subdomains.txt' },
+          { descKey: 'cheatsheet_gobuster_cat2_cmd1', cmd: 'wfuzz -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "http://lookup.thm" -H "Host: FUZZ.lookup.thm" --hc=302' },
           { descKey: 'cheatsheet_gobuster_cat2_cmd2', cmd: 'gobuster dns -d target.com -w wordlist.txt --resolver 8.8.8.8' },
           { descKey: 'cheatsheet_recon_wfuzz', cmd: 'wfuzz -c -hl=136 -t 200 -w [dic] -u [URL]/index.php?FUZZ=/etc/passwd' },
         ],
@@ -91,6 +91,42 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_recon_ss', cmd: 'ss -tln' },
           { descKey: 'cheatsheet_recon_netstat', cmd: 'netstat -tnlp' },
           { descKey: 'cheatsheet_recon_whatweb', cmd: 'whatweb [ip]' },
+        ],
+      },
+    ],
+  },
+
+  // ========== FUZZING ==========
+  ffuf: {
+    id: 'ffuf',
+    sectionId: 'reconocimiento',
+    name: 'FFUF',
+    descKey: 'cheatsheet_ffuf_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_ffuf_cat1_title',
+        commands: [
+          { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: 'ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "[target_url]" -H "Host: FUZZ.[target_domain]" --hc=302' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: 'ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u "[target_url]" -d "username=FUZZ&password=password123" -H "Content-Type: application/x-www-form-urlencoded" -fs 74' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u "[target_url]/FUZZ' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w wordlist.txt -u "[target_url]/FUZZ" -x php,html,txt' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_ffuf_cat2_title',
+        params: [
+          { param: '-w', descKey: 'cheatsheet_ffuf_param_w' },
+          { param: '-u', descKey: 'cheatsheet_ffuf_param_u' },
+          { param: '-X', descKey: 'cheatsheet_ffuf_param_X' },
+          { param: '-d', descKey: 'cheatsheet_ffuf_param_d' },
+          { param: '-H', descKey: 'cheatsheet_ffuf_param_H' },
+          { param: '-fs', descKey: 'cheatsheet_ffuf_param_fs' },
+          { param: '-fl', descKey: 'cheatsheet_ffuf_param_fl' },
+          { param: '-fw', descKey: 'cheatsheet_ffuf_param_fw' },
+          { param: '-t', descKey: 'cheatsheet_ffuf_param_t' },
+          { param: '-c', descKey: 'cheatsheet_ffuf_param_c' },
+          { param: '-v', descKey: 'cheatsheet_ffuf_param_v' },
+          { param: '-x', descKey: 'cheatsheet_ffuf_param_x' },
         ],
       },
     ],
