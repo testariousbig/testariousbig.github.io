@@ -47,22 +47,20 @@ export const cheatsheetTools = {
   gobuster: {
     id: 'gobuster',
     sectionId: 'reconocimiento',
-    name: 'Gobuster y WFuzz',
+    name: 'Gobuster',
     descKey: 'cheatsheet_gobuster_desc',
     categories: [
       {
         titleKey: 'cheatsheet_gobuster_cat1_title',
         commands: [
-          { descKey: 'cheatsheet_gobuster_cat1_cmd1', cmd: 'gobuster dir -u http://target.com -w /usr/share/wordlists/dirb/common.txt' },
-          { descKey: 'cheatsheet_gobuster_cat1_cmd2', cmd: 'gobuster dir -u http://target.com -w wordlist.txt -x php,html,txt' },
+          { descKey: 'cheatsheet_gobuster_cat1_cmd1', cmd: 'gobuster dir -u http://target.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt' },
+          { descKey: 'cheatsheet_gobuster_cat1_cmd2', cmd: 'gobuster dir -u http://target.com -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt' },
         ],
       },
       {
         titleKey: 'cheatsheet_gobuster_cat2_title',
         commands: [
-          { descKey: 'cheatsheet_gobuster_cat2_cmd1', cmd: 'wfuzz -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "http://lookup.thm" -H "Host: FUZZ.lookup.thm" --hc=302' },
-          { descKey: 'cheatsheet_gobuster_cat2_cmd2', cmd: 'gobuster dns -d target.com -w wordlist.txt --resolver 8.8.8.8' },
-          { descKey: 'cheatsheet_recon_wfuzz', cmd: 'wfuzz -c -hl=136 -t 200 -w [dic] -u [URL]/index.php?FUZZ=/etc/passwd' },
+          { descKey: 'cheatsheet_gobuster_cat2_cmd2', cmd: 'gobuster dns -d target.com -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt --resolver 8.8.8.8' },
         ],
       },
       {
@@ -78,24 +76,6 @@ export const cheatsheetTools = {
       },
     ],
   },
-  'recon-red': {
-    id: 'recon-red',
-    sectionId: 'reconocimiento',
-    nameKey: 'cheatsheet_recon_red',
-    descKey: 'cheatsheet_recon_red_desc',
-    categories: [
-      {
-        titleKey: 'cheatsheet_recon_red_title',
-        commands: [
-          { descKey: 'cheatsheet_recon_arp', cmd: 'arp-scan -I eth0 -localnet -ignoredups' },
-          { descKey: 'cheatsheet_recon_ss', cmd: 'ss -tln' },
-          { descKey: 'cheatsheet_recon_netstat', cmd: 'netstat -tnlp' },
-          { descKey: 'cheatsheet_recon_whatweb', cmd: 'whatweb [ip]' },
-        ],
-      },
-    ],
-  },
-
   // ========== FUZZING ==========
   ffuf: {
     id: 'ffuf',
@@ -106,10 +86,10 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_ffuf_cat1_title',
         commands: [
-          { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: 'ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "[target_url]" -H "Host: FUZZ.[target_domain]" --hc=302' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: 'ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u "[target_url]" -d "username=FUZZ&password=password123" -H "Content-Type: application/x-www-form-urlencoded" -fs 74' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u "[target_url]/FUZZ' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w wordlist.txt -u "[target_url]/FUZZ" -x php,html,txt' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: 'ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "[target_url]" -H "Host: FUZZ.[target_domain]"' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: 'ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u "[target_url]" -d "username=FUZZ&password=password123" -H "Content-Type: application/x-www-form-urlencoded"' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u [target_url]/FUZZ' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u [target_url]/index.php?FUZZ=/etc/passwd' },
         ],
       },
       {
@@ -127,6 +107,23 @@ export const cheatsheetTools = {
           { param: '-c', descKey: 'cheatsheet_ffuf_param_c' },
           { param: '-v', descKey: 'cheatsheet_ffuf_param_v' },
           { param: '-x', descKey: 'cheatsheet_ffuf_param_x' },
+        ],
+      },
+    ],
+  },
+  'recon-red': {
+    id: 'recon-red',
+    sectionId: 'reconocimiento',
+    nameKey: 'cheatsheet_recon_red',
+    descKey: 'cheatsheet_recon_red_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_recon_red_title',
+        commands: [
+          { descKey: 'cheatsheet_recon_arp', cmd: 'arp-scan -I eth0 -localnet -ignoredups' },
+          { descKey: 'cheatsheet_recon_ss', cmd: 'ss -tln' },
+          { descKey: 'cheatsheet_recon_netstat', cmd: 'netstat -tnlp' },
+          { descKey: 'cheatsheet_recon_whatweb', cmd: 'whatweb [ip]' },
         ],
       },
     ],
@@ -160,7 +157,7 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_hydra_title',
         commands: [
-          { descKey: 'cheatsheet_hydra_cmd1', cmd: 'hydra [protocol]://[host]:[port] -l [user] -P [wordlist]' },
+          { descKey: 'cheatsheet_hydra_cmd1', cmd: 'hydra [protocol]://[host]:[port] -l [user] -P /usr/share/wordlists/rockyou.txt' },
         ],
       },
     ],
@@ -233,7 +230,7 @@ export const cheatsheetTools = {
         titleKey: 'cheatsheet_portfw_title',
         commands: [
           { descKey: 'cheatsheet_portfw_ssh', cmd: 'ssh -L [attacker_port]:[ip_local_victim:port_victim] [username@ip_victim]' },
-          { descKey: 'cheatsheet_portfw_example', cmd: 'ssh -L 9999:localhost:8080 michael@sightless.htb' },
+          { descKey: 'cheatsheet_portfw_example', cmd: 'ssh -L 9999:localhost:8080 [username@ip_victim]' },
         ],
       },
     ],
