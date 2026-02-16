@@ -2,6 +2,8 @@ import './style.css';
 import { getLang, setLang, t } from './i18n.js';
 import { renderContent } from './loader.js';
 import { cheatsheetTools, cheatsheetSections } from './cheatsheet-data.js';
+import { writeupPlatforms, writeupSections } from './writeup-data.js';
+import { loadWriteups, renderWriteupContent } from './writeup-loader.js';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-bash';
@@ -25,6 +27,7 @@ function renderUI() {
           <a href="#home" class="nav-item ${currentHash === '#home' ? 'active' : ''}">${t('home')}</a>
           <a href="#cv" class="nav-item ${currentHash === '#cv' ? 'active' : ''}">${t('cv')}</a>
           <a href="#cheatsheet" class="nav-item ${currentHash.startsWith('#cheatsheet') ? 'active' : ''}">${t('cheatsheet')}</a>
+          <a href="#writeups" class="nav-item ${currentHash.startsWith('#writeups') ? 'active' : ''}">${t('writeups')}</a>
           <button id="lang-toggle" class="nav-item flex items-center opacity-80 hover:opacity-100 uppercase text-[10px] tracking-widest pl-4 border-l border-white/10 group">
             ${lang === 'es' ? flags.en : flags.es}
             <span>${t('switchLang')}</span>
@@ -159,23 +162,111 @@ function renderCheatsheetLayout(activeToolId, tool) {
   `;
 }
 
+function renderWriteupsLayout(activePlatformId, writeupId = null) {
+  const sidebarItems = writeupSections.map((sec) => {
+    const platforms = Object.values(writeupPlatforms);
+    const platformsHtml = platforms.map((platform) => {
+      const isActive = platform.id === activePlatformId;
+      return `
+        <a href="#writeups/${platform.id}" class="cheatsheet-sidebar-item pl-4 ${isActive ? 'active' : ''}">
+          <div class="flex items-center gap-2">
+            ${platform.icon}
+            <div>
+              <span class="font-semibold">${t(platform.nameKey)}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+    return `
+      <div class="mb-4">
+        <h4 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-2 px-2">${t(sec.titleKey)}</h4>
+        <div class="space-y-1">${platformsHtml}</div>
+      </div>
+    `;
+  }).join('');
+
+  const activePlatform = writeupPlatforms[activePlatformId] || writeupPlatforms.dockerlabs;
+
+  // Función para renderizar la lista de writeups
+  const renderWriteupsList = (writeups) => {
+    if (writeups.length === 0) {
+      return `
+        <div class="glass-dark rounded-xl p-8 text-center">
+          <div class="flex flex-col items-center gap-4">
+            <svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <p class="text-white/40">${t('writeups_no_writeups')}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="grid gap-4">
+        ${writeups.map(writeup => `
+          <a href="#writeups/${activePlatformId}/${writeup.id}" class="glass-dark rounded-xl p-6 block hover:border-white/15 transition-all hover:scale-[1.02] group">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  ${writeup.title}
+                </h3>
+                <div class="flex flex-wrap gap-2 mb-3">
+                  <span class="px-2 py-1 text-xs rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                    ${writeup.difficulty || 'Unknown'}
+                  </span>
+                  <span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                    ${writeup.category || 'General'}
+                  </span>
+                </div>
+                <div class="text-sm text-white/40">
+                  <span>${writeup.date}</span>
+                  ${writeup.author ? ` • ${writeup.author}` : ''}
+                </div>
+              </div>
+              <svg class="w-5 h-5 text-white/20 group-hover:text-white/40 transition-colors mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        `).join('')}
+      </div>
+    `;
+  };
+
+  // Contenido principal
+  const mainContent = `
+    <div class="mb-6">
+      <div class="flex items-center gap-3 mb-6">
+        ${activePlatform.icon}
+        <h2 class="text-2xl font-bold text-white">${t(activePlatform.nameKey)}</h2>
+      </div>
+
+      <div id="writeups-content">
+        <div class="flex items-center justify-center py-12">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white/50"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return `
+    <aside class="glass shrink-0 w-full md:w-64 rounded-xl p-4 h-fit md:sticky md:top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+      <nav class="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+        ${sidebarItems}
+      </nav>
+    </aside>
+    <div class="glass-card flex-1 min-w-0">
+      ${mainContent}
+    </div>
+  `;
+}
+
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
-}
-
-function handleCopy(btn) {
-  const text = btn.getAttribute('data-copy');
-  if (!text) return;
-  navigator.clipboard.writeText(text).then(() => {
-    btn.innerHTML = `<svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
-    btn.classList.add('!text-emerald-400');
-    setTimeout(() => {
-      btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>`;
-      btn.classList.remove('!text-emerald-400');
-    }, 1500);
-  });
 }
 
 function setupEventListeners() {
@@ -189,12 +280,14 @@ function setupEventListeners() {
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash || '#home';
-    if (hash.startsWith('#cheatsheet')) {
-      handleRouting(); // Solo actualizar contenido, no toda la UI
-    } else {
-      renderUI(); // Renderizar UI completa para otras secciones
+    // Siempre actualizar el header primero
+    renderUI();
+
+    // Si es cheatsheet o writeups, actualizar contenido dinámicamente
+    if (hash.startsWith('#cheatsheet') || hash.startsWith('#writeups')) {
+      handleRouting();
     }
-  }, { once: true }); // Avoid multiple listeners if rerendering
+  });
 }
 
 function handleRouting() {
@@ -211,6 +304,79 @@ function handleRouting() {
     contentArea.querySelectorAll('.copy-btn').forEach((btn) => {
       btn.addEventListener('click', () => handleCopy(btn));
     });
+    return;
+  }
+
+  if (hash.startsWith('#writeups')) {
+    const hashParts = hash.split('/').filter(part => part);
+    const platformId = hashParts[1] || 'dockerlabs';
+    const writeupId = hashParts[2] || null;
+
+    contentArea.className = 'fade-in min-h-[400px] w-full flex flex-col md:flex-row gap-6';
+    contentArea.innerHTML = renderWriteupsLayout(platformId, writeupId);
+
+    // Cargar contenido dinámicamente
+    const contentContainer = document.querySelector('#writeups-content');
+    if (contentContainer) {
+      if (writeupId) {
+        // Cargar writeup individual - usar la misma lógica que el CV
+        renderWriteupContent(platformId, writeupId, contentContainer).then(() => {
+          // Resaltar sintaxis de código
+          Prism.highlightAllUnder(contentContainer);
+        });
+      } else {
+        // Cargar lista de writeups
+        loadWriteups(platformId).then(writeups => {
+          const renderWriteupsList = (writeups) => {
+            if (writeups.length === 0) {
+              return `
+                <div class="glass-dark rounded-xl p-8 text-center">
+                  <div class="flex flex-col items-center gap-4">
+                    <svg class="w-16 h-16 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <p class="text-white/40">${t('writeups_no_writeups')}</p>
+                  </div>
+                </div>
+              `;
+            }
+
+            return `
+              <div class="grid gap-4">
+                ${writeups.map(writeup => `
+                  <a href="#writeups/${platformId}/${writeup.id}" class="glass-dark rounded-xl p-6 block hover:border-white/15 transition-all hover:scale-[1.02] group">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                          ${writeup.title}
+                        </h3>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                          <span class="px-2 py-1 text-xs rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                            ${writeup.difficulty || 'Unknown'}
+                          </span>
+                          <span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                            ${writeup.category || 'General'}
+                          </span>
+                        </div>
+                        <div class="text-sm text-white/40">
+                          <span>${writeup.date}</span>
+                          ${writeup.author ? ` • ${writeup.author}` : ''}
+                        </div>
+                      </div>
+                      <svg class="w-5 h-5 text-white/20 group-hover:text-white/40 transition-colors mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </div>
+                  </a>
+                `).join('')}
+              </div>
+            `;
+          };
+
+          contentContainer.innerHTML = renderWriteupsList(writeups);
+        });
+      }
+    }
     return;
   }
 
@@ -281,7 +447,7 @@ function handleRouting() {
                   <span class="text-sm font-semibold text-white/90">${t('statusCTF')}</span>
                   <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">${t('statusOngoing')}</span>
                 </div>
-                <p class="text-xs text-white/40">HackTheBox / TryHackMe</p>
+                <p class="text-xs text-white/40">HackTheBox / TryHackMe / DockerLabs</p>
               </div>
             </li>
 
@@ -309,7 +475,7 @@ function handleRouting() {
 // Ensure hashchange listener is centralized and not duplicated
 window.onhashchange = () => {
   const hash = window.location.hash || '#home';
-  if (hash.startsWith('#cheatsheet')) {
+  if (hash.startsWith('#cheatsheet') || hash.startsWith('#writeups')) {
     handleRouting(); // Solo actualizar contenido, no toda la UI
   } else {
     renderUI(); // Renderizar UI completa para otras secciones

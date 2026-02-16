@@ -18,6 +18,7 @@ category: cv
 <div>
 
 ## Formación
+- **Jr Penetration Tester Path** - TryHackMe (2026)
 - **SOC Level I Path** - TryHackMe (2026)
 - **Curso Introducción al Hacking – Curso introducción a Linux** - Academia Hack4u (2024)
 - **CFGS Desarrollo de Aplicaciones Web** - Instituto FOC – Granada (2020-2022)
