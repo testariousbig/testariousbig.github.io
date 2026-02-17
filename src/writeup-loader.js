@@ -53,47 +53,18 @@ export async function renderWriteupContent(platform, writeupId, container) {
 // Función para cargar writeups desde una plataforma
 export async function loadWriteups(platform) {
   try {
-    const response = await fetch(`/content/writeups/${platform}/index.json`);
+    // Cargar writeups desde archivo JSON central
+    const response = await fetch('/content/writeups.json');
     if (!response.ok) {
-      // Si no hay index.json, intentamos escanear los archivos .md
-      return await scanWriteupFiles(platform);
+      console.error('No se pudo cargar writeups.json');
+      return [];
     }
 
-    const contentType = response.headers.get('content-type') || '';
-    if (!contentType.includes('application/json')) {
-      return await scanWriteupFiles(platform);
-    }
-
-    const writeups = await response.json();
-    return writeups;
+    const writeupsData = await response.json();
+    return writeupsData[platform] || [];
   } catch (error) {
-    return await scanWriteupFiles(platform);
-  }
-}
-
-// Función para escanear archivos .md (fallback)
-async function scanWriteupFiles(platform) {
-  try {
-    // Lista de writeups conocidos por plataforma
-    const knownWriteups = {
-      dockerlabs: [
-        {
-          id: 'pequenas-mentirosas',
-          title: 'Pequeñas Mentirosas',
-          difficulty: 'Easy',
-          date: '16/02/2026',
-          category: 'Fuerza Bruta',
-          author: 'Samuel Rodriguez aka Testarious',
-          file: 'pequenas-mentirosas.md'
-        }
-      ],
-      tryhackme: [],
-      hackthebox: []
-    };
-
-    return knownWriteups[platform] || [];
-  } catch (error) {
-    console.error(`Error escaneando writeups para ${platform}:`, error);
+    console.error('Error loading writeups from JSON:', error);
     return [];
   }
 }
+

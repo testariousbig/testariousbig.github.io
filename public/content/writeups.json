@@ -1,0 +1,23 @@
+{
+  "dockerlabs": [
+    {
+      "id": "pequenas-mentirosas",
+      "title": "Pequeñas Mentirosas",
+      "difficulty": "Easy",
+      "date": "16/02/2026",
+      "categories": ["Fuerza Bruta", "Web Exploitation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "pequenas-mentirosas.md"
+    },
+    {
+      "id": "whereismywebshell",
+      "title": "Where is my webshell?",
+      "difficulty": "Easy",
+      "date": "17/02/2026",
+      "categories": ["Web Exploitation", "Command Injection", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "whereismywebshell.md"
+    }
+  ],
+  "tryhackme": []
+}

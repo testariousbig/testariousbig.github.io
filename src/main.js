@@ -216,9 +216,11 @@ function renderWriteupsLayout(activePlatformId, writeupId = null) {
                   <span class="px-2 py-1 text-xs rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
                     ${writeup.difficulty || 'Unknown'}
                   </span>
-                  <span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                    ${writeup.category || 'General'}
-                  </span>
+                  ${(writeup.categories || [writeup.category || 'General']).map(cat => 
+                    `<span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                      ${cat}
+                    </span>`
+                  ).join('')}
                 </div>
                 <div class="text-sm text-white/40">
                   <span>${writeup.date}</span>
@@ -354,9 +356,11 @@ function handleRouting() {
                           <span class="px-2 py-1 text-xs rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
                             ${writeup.difficulty || 'Unknown'}
                           </span>
-                          <span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
-                            ${writeup.category || 'General'}
-                          </span>
+                          ${(writeup.categories || [writeup.category || 'General']).map(cat => 
+                            `<span class="px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30">
+                              ${cat}
+                            </span>`
+                          ).join('')}
                         </div>
                         <div class="text-sm text-white/40">
                           <span>${writeup.date}</span>

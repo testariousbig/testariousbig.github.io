@@ -4,7 +4,7 @@
 
 - **Plataforma**: DockerLabs
 - **Dificultad**: Easy
-- **Categoría**: Fuerza Bruta
+- **Categorías**: Fuerza Bruta | Web Exploitation
 - **Fecha**: 16/02/2026
 - **Tiempo empleado**: 10 minutos
 - **Autor**: Samuel Rodriguez aka Testarious

