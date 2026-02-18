@@ -5,7 +5,7 @@
       "title": "Pequeñas Mentirosas",
       "difficulty": "Easy",
       "date": "16/02/2026",
-      "categories": ["Fuerza Bruta", "Web Exploitation"],
+      "categories": ["Brute Force", "Web Exploitation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "pequenas-mentirosas.md"
     },
@@ -19,5 +19,15 @@
       "file": "whereismywebshell.md"
     }
   ],
-  "tryhackme": []
+  "hackthebox": [
+    {
+      "id": "cap",
+      "title": "Cap",
+      "difficulty": "Easy",
+      "date": "18/02/2026",
+      "categories": ["Web Exploitation", "Log Analysis"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "cap.md"
+    }
+  ]
 }
