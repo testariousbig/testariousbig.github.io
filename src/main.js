@@ -65,7 +65,7 @@ function renderUI() {
       </header>
 
       <!-- Main Content Area -->
-      <main class="flex-grow px-6 pb-16 max-w-6xl mx-auto w-full">
+      <main class="flex-grow px-6 pb-16 max-w-7xl mx-auto w-full">
         <div id="content" class="glass-card fade-in min-h-[400px]">
           <div class="animate-pulse flex flex-col gap-4">
             <div class="h-6 bg-white/5 rounded w-1/4"></div>
@@ -145,7 +145,7 @@ function renderCheatsheetLayout(activeToolId, tool) {
   }).join('');
 
   return `
-    <aside class="glass shrink-0 w-full md:w-56 rounded-xl p-4 h-fit md:sticky md:top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
+    <aside class="glass shrink-0 w-full md:w-60 rounded-xl p-4 h-fit md:sticky md:top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
       <nav class="flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
         ${sidebarItems}
       </nav>

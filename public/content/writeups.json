@@ -17,6 +17,15 @@
       "categories": ["Web Exploitation", "Command Injection", "Privilege Escalation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "whereismywebshell.md"
+    },
+    {
+      "id": "mirame",
+      "title": "Mirame",
+      "difficulty": "Easy",
+      "date": "20/02/2026",
+      "categories": ["Web Exploitation", "SQL Injection", "Cracking", "Steganography", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "mirame.md"
     }
   ],
   "hackthebox": [
