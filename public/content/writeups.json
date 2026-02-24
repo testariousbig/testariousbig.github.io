@@ -38,5 +38,16 @@
       "author": "Samuel Rodriguez aka Testarious",
       "file": "cap.md"
     }
+  ],
+  "tryhackme": [
+    {
+      "id": "billing",
+      "title": "Billing",
+      "difficulty": "Easy",
+      "date": "24/02/2026",
+      "categories": ["CVE Exploitation", "Research", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "billing.md"
+    } 
   ]
 }
