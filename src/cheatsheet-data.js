@@ -76,6 +76,36 @@ export const cheatsheetTools = {
       },
     ],
   },
+  wpscan: {
+    id: 'wpscan',
+    sectionId: 'reconocimiento',
+    name: 'WPScan',
+    descKey: 'cheatsheet_wpscan_desc',
+    categories: [
+      {
+        titleKey: 'cheatsheet_wpscan_cat1_title',
+        commands: [
+          { descKey: 'cheatsheet_wpscan_cat1_cmd1', cmd: 'wpscan --url http://target.com --enumerate' },
+          { descKey: 'cheatsheet_wpscan_cat1_cmd2', cmd: 'wpscan --url http://target.com --enumerate u' },
+          { descKey: 'cheatsheet_wpscan_cat1_cmd3', cmd: 'wpscan --url http://target.com --enumerate p' },
+          { descKey: 'cheatsheet_wpscan_cat1_cmd4', cmd: 'wpscan --url http://target.com --enumerate t' },
+          { descKey: 'cheatsheet_wpscan_cat1_cmd5', cmd: 'wpscan --url http://target.com --api-token [api_token]' },
+        ],
+      },
+      {
+        titleKey: 'cheatsheet_wpscan_cat2_title',
+        params: [
+          { param: '--url', descKey: 'cheatsheet_wpscan_param_url' },
+          { param: '--enumerate', descKey: 'cheatsheet_wpscan_param_enumerate' },
+          { param: '--api-token', descKey: 'cheatsheet_wpscan_param_api_token' },
+          { param: '--plugins-detection', descKey: 'cheatsheet_wpscan_param_plugins_detection' },
+          { param: '--themes-detection', descKey: 'cheatsheet_wpscan_param_themes_detection' },
+          { param: '--force', descKey: 'cheatsheet_wpscan_param_force' },
+          { param: '--update', descKey: 'cheatsheet_wpscan_param_update' },
+        ],
+      },
+    ],
+  },
   // ========== FUZZING ==========
   ffuf: {
     id: 'ffuf',

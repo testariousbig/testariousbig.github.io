@@ -59,9 +59,7 @@ During the web reconnaissance, looking at the technologies used to create it, we
 
 So we decide to search for known vulnerabilities for this tool and after a bit of research and Google searches, we find that there is an associated CVE (CVE-2023-30258) and a Python script that exploits it for this tool.
 
-```bash
-https://github.com/hadrian3689/magnus_billing_rce
-```
+➡️ [Python Script](https://github.com/hadrian3689/magnus_billing_rce)
 
 ![GitHub](./content/screenshots/billing/github.png)
 

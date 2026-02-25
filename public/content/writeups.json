@@ -26,6 +26,15 @@
       "categories": ["Web Exploitation", "SQL Injection", "Cracking", "Steganography", "Privilege Escalation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "mirame.md"
+    },
+    {
+      "id": "walkingcms",
+      "title": "WalkingCMS",
+      "difficulty": "Easy",
+      "date": "25/02/2026",
+      "categories": ["Wordpress", "Web Exploitation", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "walkingcms.md"
     }
   ],
   "hackthebox": [

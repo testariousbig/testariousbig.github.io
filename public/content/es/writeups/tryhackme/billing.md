@@ -61,9 +61,7 @@ MagnusBilling es un sistema de facturación VoIP (Voice over IP) de código abie
 
 Así que decidimos buscar vulnerabilidades conocidas para esta herramienta y tras un poco de investigación y búsquedas en Google, encontramos que existe un CVE asociado (CVE-2023-30258) y un script en python que lo explota para esta herramienta.
 
-```bash
-https://github.com/hadrian3689/magnus_billing_rce
-```
+➡️ [Script en Python](https://github.com/hadrian3689/magnus_billing_rce)
 
 ![GitHub](./content/screenshots/billing/github.png)
 

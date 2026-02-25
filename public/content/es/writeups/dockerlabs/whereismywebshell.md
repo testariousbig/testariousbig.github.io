@@ -5,7 +5,7 @@
 - **Plataforma**: DockerLabs
 - **Dificultad**: Fácil
 - **Categorías**: Web Exploitation | Command Injection | Privilege Escalation
-- **Fecha**: 17 de febrero de 2026
+- **Fecha**: 17/02/2026
 - **Tiempo empleado**: ~30 minutos
 - **Autor**: Samuel Rodríguez aka Testarious
 
