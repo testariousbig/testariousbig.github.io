@@ -120,6 +120,7 @@ export const cheatsheetTools = {
           { descKey: 'cheatsheet_ffuf_cat1_cmd2', cmd: "ffuf -w /usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt -X POST -u '[target_url]' -d 'username=FUZZ&password=password123' -H 'Content-Type: application/x-www-form-urlencoded'" },
           { descKey: 'cheatsheet_ffuf_cat1_cmd3', cmd: "ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u '[target_url]/FUZZ'" },
           { descKey: 'cheatsheet_ffuf_cat1_cmd4', cmd: "ffuf -w /usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt -u '[target_url]/index.php?FUZZ=whoami'" },
+          { descKey: 'cheatsheet_ffuf_cat1_cmd5', cmd: "ffuf -w /usr/share/wordlists/SecLists/Usernames/Names/names.txt -X POST -d 'username=FUZZ&password=123456' -H 'Content-Type: application/x-www-form-urlencoded' -u [IP]"}
         ],
       },
       {
@@ -188,6 +189,7 @@ export const cheatsheetTools = {
         titleKey: 'cheatsheet_hydra_title',
         commands: [
           { descKey: 'cheatsheet_hydra_cmd1', cmd: 'hydra [protocol]://[host]:[port] -l [user] -P /usr/share/wordlists/rockyou.txt' },
+          { descKey: 'cheatsheet_hydra_cmd2', cmd: "hydra -l [user] -P /usr/share/wordlists/rockyou.txt [IP] http-post-form '/login.php:username=^USER^&password=^PASS^:Wrong password'"}
         ],
       },
     ],

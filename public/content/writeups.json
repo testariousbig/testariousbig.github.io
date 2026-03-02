@@ -57,6 +57,15 @@
       "categories": ["CVE Exploitation", "Research", "Privilege Escalation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "billing.md"
-    } 
+    },
+    {
+      "id": "lookup",
+      "title": "Lookup",
+      "difficulty": "Easy",
+      "date": "02/03/2026",
+      "categories": ["Brute Force", "Metasploit", "PATH Hijacking"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "lookup.md"
+    }
   ]
 }
