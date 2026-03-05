@@ -66,6 +66,15 @@
       "categories": ["Brute Force", "Metasploit", "PATH Hijacking"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "lookup.md"
+    },
+    {
+      "id": "publisher",
+      "title": "Publisher",
+      "difficulty": "Easy",
+      "date": "05/03/2026",
+      "categories": ["CVE Exploitation", "Research", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "publisher.md"
     }
   ]
 }
