@@ -35,6 +35,15 @@
       "categories": ["Wordpress", "Web Exploitation", "Privilege Escalation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "walkingcms.md"
+    },
+    {
+      "id": "injection",
+      "title": "Injection",
+      "difficulty": "Easy",
+      "date": "06/03/2026",
+      "categories": ["SQL Injection", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "injection.md"
     }
   ],
   "hackthebox": [
