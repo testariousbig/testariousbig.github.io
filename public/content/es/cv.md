@@ -75,29 +75,32 @@ Startup del sector marketing y análisis de datos.
 
 ### Herramientas de Seguridad (Nivel Básico)
 <div class="flex flex-wrap gap-3 mb-8">
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/elasticstack" alt="ElasticStack"> ElasticStack</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/splunk" alt="Splunk"> Splunk</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/monster" alt="Microsoft Sentinel"> Microsoft Sentinel</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/zotero" alt="Zabbix"> Zabbix</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/wireshark" alt="Wireshark"> Wireshark</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/kalilinux" alt="Kali Linux"> Kali Linux</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/radar.png" alt="NMAP"> NMAP</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/metasploit" alt="Metasploit"> Metasploit</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/burpsuite" alt="Burp Suite"> Burp Suite</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/redragon" alt="Hydra"> Hydra</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="GoBuster"> GoBuster</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" alt="Ffuf"> Ffuf</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/shield.png" alt="OWASP Top 10"> OWASP Top 10</span>
+  <span class="tech-tag"><img src="https://img.icons8.com/?size=100&id=5eAw9dVvM297&format=png&color=ffffff" alt="SQLMap"> SQLMap</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/wireshark" alt="Wireshark"> Wireshark</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/elasticstack" alt="ElasticStack"> ElasticStack</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/splunk" alt="Splunk"> Splunk</span>
 </div>
 
 ### Programación
 <div class="flex flex-wrap gap-3 mb-8">
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/python" alt="Python"> Python</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript"> JavaScript</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/php" alt="PHP">PHP</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/symfony" alt="Symfony">Symfony</span>
-  <span class="tech-tag"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/php" alt="PHP">PHP</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/javascript" alt="JavaScript"> JavaScript</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/jquery" alt="JavaScript"> JQuery</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/mysql" alt="MySQL"> MySQL</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/python" alt="Python"> Python</span>
   <span class="tech-tag"><img src="https://img.icons8.com/ios-filled/50/ffffff/api.png" alt="APIs"> API Management</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/html5" alt="HTML5">HTML</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/css" alt="CSS3">CSS</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/bootstrap" alt="CSS3">Bootstrap</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/tailwindcss" alt="CSS3">TailwindCSS</span>
 </div>
 
@@ -115,6 +118,7 @@ Startup del sector marketing y análisis de datos.
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/bitbucket" alt="Bitbucket">Bitbucket</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/jira" alt="Jira">Jira</span>
   <span class="tech-tag"><img src="https://cdn.simpleicons.org/trello" alt="Trello">Trello</span>
+  <span class="tech-tag"><img src="https://cdn.simpleicons.org/confluence" alt="Confluence">Confluence</span>
 </div>
 
 </div>
