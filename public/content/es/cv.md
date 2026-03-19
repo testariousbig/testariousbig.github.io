@@ -35,10 +35,14 @@ category: cv
 
 <div>
 
+## Proyectos Personales
+- [Shield🛡️Check](https://shield-check.vercel.app)
+- [ScoreLite](https://scorelite.vercel.app)
+
 ## Proyectos WordPress
-- **TWINS** — [twins.tech](https://twins.tech)
-- **Fisio Galiano** — [fisioterapiagaliano.es](https://fisioterapiagaliano.es)
-- **TrucksMotril** — [trucksmotril.es](https://trucksmotril.es)
+- [TWINS](https://twins.tech)
+- [Fisio Galiano](https://fisioterapiagaliano.es)
+- [TrucksMotril](https://trucksmotril.es)
 
 </div>
 
