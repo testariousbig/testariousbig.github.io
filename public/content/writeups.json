@@ -53,6 +53,15 @@
       "categories": ["SQL Injection", "Cracking", "Privilege Escalation"],
       "author": "Samuel Rodriguez aka Testarious",
       "file": "backend.md"
+    },
+    {
+      "id": "grooti",
+      "title": "Grooti",
+      "difficulty": "Easy",
+      "date": "30/03/2026",
+      "categories": ["Web Exploitation", "Research", "Privilege Escalation"],
+      "author": "Samuel Rodriguez aka Testarious",
+      "file": "grooti.md"
     }
   ],
   "hackthebox": [
